@@ -47,3 +47,15 @@ module Peaks
   end
 
 end
+
+
+module Enumerable
+  def peaks(n, &block)
+    peak_list = []
+    self.each_cons(n * 2 + 1) do |arr|
+      peak_list << Peaks.find_peaks(arr, n, &block)
+    end
+
+    peak_list.compact.uniq
+  end
+end
